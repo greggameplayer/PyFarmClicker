@@ -104,15 +104,17 @@ class MAINGAME:
     def onBtFinirClick(self, *_event):
         if not self.items:
             tkmessage.showwarning(
-                "Attention", "Vous n'avez pas acheté de plantes et/ou d'animaux !"
-            )
+                "Attention",
+                "Vous n'avez pas acheté de plantes et/ou d'animaux !")
             return
-        pactolenb = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.pactole["text"])
+        pactolenb = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
+                               self.pactole["text"])
         pactolenb = float(f"{float(pactolenb[0]):.2f}")
         fashionflowercolor = getFashionFlowerColor()
         diff = 0
         for item in self.items:
-            if isinstance(item, Fleur) and item.getCouleur() == fashionflowercolor:
+            if isinstance(item,
+                          Fleur) and item.getCouleur() == fashionflowercolor:
                 itemprice = item.vendre()
                 pactolenb += float(itemprice) * 2
                 diff = float(diff) + float(itemprice) * 2
@@ -145,9 +147,9 @@ class MAINGAME:
             child.unbind("<Button-1>")
             child.unbind("<<ComboboxSelected>>")
             child.destroy()
-        self.listeCombobox = ttk.Combobox(
-            self.centerbottomframe, values=getLegumesNames(), state="readonly"
-        )
+        self.listeCombobox = ttk.Combobox(self.centerbottomframe,
+                                          values=getLegumesNames(),
+                                          state="readonly")
         self.listeCombobox.pack()
         self.listeCombobox.current(0)
         self.PriceLabel = Label(self.centerbottomframe, text="0.5 €")
@@ -159,9 +161,8 @@ class MAINGAME:
             width=20,
         )
         self.buyBt.pack(pady="10")
-        self.listeCombobox.bind(
-            "<<ComboboxSelected>>", partial(self.onComboboxChange, "legumes")
-        )
+        self.listeCombobox.bind("<<ComboboxSelected>>",
+                                partial(self.onComboboxChange, "legumes"))
         self.buyBt.bind("<Button-1>", partial(self.onBtBuyClick, "legumes"))
 
     def onBtFleursClick(self, *_event):
@@ -169,9 +170,9 @@ class MAINGAME:
             child.unbind("<Button-1>")
             child.unbind("<<ComboboxSelected>>")
             child.destroy()
-        self.listeCombobox = ttk.Combobox(
-            self.centerbottomframe, values=getFlowersNames(), state="readonly"
-        )
+        self.listeCombobox = ttk.Combobox(self.centerbottomframe,
+                                          values=getFlowersNames(),
+                                          state="readonly")
         self.listeCombobox.pack()
         self.listeCombobox.current(0)
         self.PriceLabel = Label(self.centerbottomframe, text="2.0 €")
@@ -183,9 +184,8 @@ class MAINGAME:
             width=20,
         )
         self.buyBt.pack(pady="10")
-        self.listeCombobox.bind(
-            "<<ComboboxSelected>>", partial(self.onComboboxChange, "fleurs")
-        )
+        self.listeCombobox.bind("<<ComboboxSelected>>",
+                                partial(self.onComboboxChange, "fleurs"))
         self.buyBt.bind("<Button-1>", partial(self.onBtBuyClick, "fleurs"))
 
     def onBtBuyClick(self, typeCombo, *_event):
@@ -193,15 +193,13 @@ class MAINGAME:
             for legume in Legumes:
                 if legume.getNom() == self.listeCombobox.get():
                     self.items.append(legume)
-                    pactolenumber = re.findall(
-                        r"[-+]?\d*\.?\d+|[-+]?\d+", self.pactole["text"]
-                    )
+                    pactolenumber = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
+                                               self.pactole["text"])
                     pactolenumber[0] = float(pactolenumber[0])
                     pactolenumber = float(f"{pactolenumber[0]:.2f}")
                     if pactolenumber - legume.getPrixAchat() < 0:
                         tkmessage.showwarning(
-                            "Attention", "Vous n'avez plus assez de flouz !"
-                        )
+                            "Attention", "Vous n'avez plus assez de flouz !")
                         break
                     pactolenumber -= legume.getPrixAchat()
                     self.pactole["text"] = str(f"{pactolenumber:.2f}") + " €"
@@ -209,15 +207,13 @@ class MAINGAME:
             for fleur in Fleurs:
                 if fleur.getNom() == self.listeCombobox.get():
                     self.items.append(fleur)
-                    pactolenumber = re.findall(
-                        r"[-+]?\d*\.?\d+|[-+]?\d+", self.pactole["text"]
-                    )
+                    pactolenumber = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
+                                               self.pactole["text"])
                     pactolenumber[0] = float(pactolenumber[0])
                     pactolenumber = float(f"{pactolenumber[0]:.2f}")
                     if pactolenumber - fleur.getPrixAchat() < 0:
                         tkmessage.showwarning(
-                            "Attention", "Vous n'avez plus assez de flouz !"
-                        )
+                            "Attention", "Vous n'avez plus assez de flouz !")
                         break
                     pactolenumber -= fleur.getPrixAchat()
                     self.pactole["text"] = str(f"{pactolenumber:.2f}") + " €"
