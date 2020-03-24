@@ -1,10 +1,11 @@
-from tkinter import *
-import tkinter.font as tkfont
-import tkinter.ttk as ttk
-import tkinter.messagebox as tkmessage
-from PyFarmClicker.plante import *
-from functools import partial
 import re
+import tkinter.font as tkfont
+import tkinter.messagebox as tkmessage
+import tkinter.ttk as ttk
+from functools import partial
+from tkinter import *
+
+from PyFarmClicker.plante import *
 
 
 class MAINGAME:
