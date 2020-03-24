@@ -17,7 +17,7 @@ class Legume:
     def vendre(self):
         rd = random.randint(0, 100)
 
-        if rd <= self.__ProbaVente*100:
+        if rd <= self.__ProbaVente * 100:
             return self.__PrixVente
         else:
             return 0
@@ -32,8 +32,16 @@ class Fleur(Legume):
         return self.__couleur
 
 
-Legumes = [Legume("courgette", 0.5, 2, 0.75), Legume("tomate", 0.4, 3, 0.5), Legume("patate", 0.9, 1.5, 0.9)]
-Fleurs = [Fleur("tulipe", 2, 4, 0.80, "rose"), Fleur("rose", 3, 7, 0.5, "rouge"), Fleur("muguet", 1, 2, 0.9, "blanc")]
+Legumes = [
+    Legume("courgette", 0.5, 2, 0.75),
+    Legume("tomate", 0.4, 3, 0.5),
+    Legume("patate", 0.9, 1.5, 0.9),
+]
+Fleurs = [
+    Fleur("tulipe", 2, 4, 0.80, "rose"),
+    Fleur("rose", 3, 7, 0.5, "rouge"),
+    Fleur("muguet", 1, 2, 0.9, "blanc"),
+]
 
 
 def getLegumesNames():
