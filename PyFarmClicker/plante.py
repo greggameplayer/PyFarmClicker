@@ -32,8 +32,10 @@ class Fleur(Legume):
         return self.__couleur
 
 
-Legumes = [Legume("courgette", 0.5, 2, 0.75), Legume("tomate", 0.4, 3, 0.5), Legume("patate", 0.9, 1.5, 0.9)]
-Fleurs = [Fleur("tulipe", 2, 4, 0.80, "rose"), Fleur("rose", 3, 7, 0.5, "rouge"), Fleur("muguet", 1, 2, 0.9, "blanc")]
+Legumes = [Legume("courgette", 0.5, 2, 0.75), Legume(
+    "tomate", 0.4, 3, 0.5), Legume("patate", 0.9, 1.5, 0.9)]
+Fleurs = [Fleur("tulipe", 2, 4, 0.80, "rose"), Fleur(
+    "rose", 3, 7, 0.5, "rouge"), Fleur("muguet", 1, 2, 0.9, "blanc")]
 
 
 def getLegumesNames():
