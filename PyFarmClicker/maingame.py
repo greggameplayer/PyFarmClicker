@@ -5,8 +5,8 @@ import tkinter.ttk as ttk
 from functools import partial
 from tkinter import *
 
-from PyFarmClicker.plante import *
 from PyFarmClicker.animaux import *
+from PyFarmClicker.plante import *
 
 
 class MAINGAME:
