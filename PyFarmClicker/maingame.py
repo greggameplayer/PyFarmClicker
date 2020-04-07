@@ -128,9 +128,9 @@ class MAINGAME:
             child.unbind("<Button-1>")
             child.unbind("<<ComboboxSelected>>")
             child.destroy()
-        self.listeComboboxAnimaux = ttk.Combobox(self.centerframe,
-                                                 values=getAnimauxNames(),
-                                                 state="readonly")
+        self.listeComboboxAnimaux = ttk.Combobox(
+            self.centerframe, values=getAnimauxNames(), state="readonly"
+        )
         self.listeComboboxAnimaux.pack()
         self.listeComboboxAnimaux.current(0)
         self.PriceLabelAnimaux = Label(self.centerframe, text="100.0 €")
@@ -142,15 +142,14 @@ class MAINGAME:
             width=20,
         )
         self.buyBtAnimaux.pack(pady="10")
-        self.listeComboboxAnimaux.bind("<<ComboboxSelected>>",
-                                       partial(self.onComboboxChange, "animaux"))
-        self.buyBtAnimaux.bind(
-            "<Button-1>", partial(self.onBtBuyClick, "animaux"))
+        self.listeComboboxAnimaux.bind(
+            "<<ComboboxSelected>>", partial(self.onComboboxChange, "animaux")
+        )
+        self.buyBtAnimaux.bind("<Button-1>", partial(self.onBtBuyClick, "animaux"))
 
     def onBtSellAnimalsClick(self, *_event):
         animalcounter = 0
-        pactolenb = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
-                               self.pactole["text"])
+        pactolenb = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.pactole["text"])
         pactolenb = float(f"{float(pactolenb[0]):.2f}")
         diff = 0
         for item in self.items[:]:
@@ -163,9 +162,7 @@ class MAINGAME:
                     item.setSelled(True)
                     self.items.remove(item)
         if animalcounter == 0:
-            tkmessage.showwarning(
-                "Attention",
-                "Vous n'avez pas acheté d'animaux !")
+            tkmessage.showwarning("Attention", "Vous n'avez pas acheté d'animaux !")
             return
         print(self.items)
 
@@ -182,13 +179,12 @@ class MAINGAME:
     def onBtFinirClick(self, *_event):
         if not self.items:
             tkmessage.showwarning(
-                "Attention",
-                "Vous n'avez pas acheté de plantes et/ou d'animaux !")
+                "Attention", "Vous n'avez pas acheté de plantes et/ou d'animaux !"
+            )
             return
         season = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.saison["text"])
         season = int(season[0]) + 1
-        pactolenb = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
-                               self.pactole["text"])
+        pactolenb = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.pactole["text"])
         pactolenb = float(f"{float(pactolenb[0]):.2f}")
         diff = 0
 
@@ -207,8 +203,7 @@ class MAINGAME:
             self.diff.configure(text=str(f"{diff:.2f}") + " €")
 
     def onBtSellPlantesClick(self, *_event):
-        pactolenb = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
-                               self.pactole["text"])
+        pactolenb = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.pactole["text"])
         pactolenb = float(f"{float(pactolenb[0]):.2f}")
         diff = 0
         plantescounter = 0
@@ -221,9 +216,7 @@ class MAINGAME:
                     diff = float(diff) + float(itemprice)
                     self.items.remove(item)
         if plantescounter == 0:
-            tkmessage.showwarning(
-                "Attention",
-                "Vous n'avez pas acheté de plantes !")
+            tkmessage.showwarning("Attention", "Vous n'avez pas acheté de plantes !")
             return
 
         season = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.saison["text"])
@@ -246,17 +239,15 @@ class MAINGAME:
     def onBtSellAllFinirClick(self, *_event):
         if not self.items:
             tkmessage.showwarning(
-                "Attention",
-                "Vous n'avez pas acheté de plantes et/ou d'animaux !")
+                "Attention", "Vous n'avez pas acheté de plantes et/ou d'animaux !"
+            )
             return
-        pactolenb = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
-                               self.pactole["text"])
+        pactolenb = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.pactole["text"])
         pactolenb = float(f"{float(pactolenb[0]):.2f}")
         fashionflowercolor = getFashionFlowerColor()
         diff = 0
         for item in self.items:
-            if isinstance(item,
-                          Fleur) and item.getCouleur() == fashionflowercolor:
+            if isinstance(item, Fleur) and item.getCouleur() == fashionflowercolor:
                 itemprice = item.vendre()
                 pactolenb += float(itemprice) * 2
                 diff = float(diff) + float(itemprice) * 2
@@ -286,17 +277,16 @@ class MAINGAME:
         elif typeCombo == "animaux":
             for animal in getAnimaux():
                 if animal.getNom() == self.listeComboboxAnimaux.get():
-                    self.PriceLabelAnimaux["text"] = str(
-                        animal.getPrixAchat()) + " €"
+                    self.PriceLabelAnimaux["text"] = str(animal.getPrixAchat()) + " €"
 
     def onBtLegumesClick(self, *_event):
         for child in self.centerbottomframe.winfo_children():
             child.unbind("<Button-1>")
             child.unbind("<<ComboboxSelected>>")
             child.destroy()
-        self.listeCombobox = ttk.Combobox(self.centerbottomframe,
-                                          values=getLegumesNames(),
-                                          state="readonly")
+        self.listeCombobox = ttk.Combobox(
+            self.centerbottomframe, values=getLegumesNames(), state="readonly"
+        )
         self.listeCombobox.pack()
         self.listeCombobox.current(0)
         self.PriceLabel = Label(self.centerbottomframe, text="0.5 €")
@@ -308,8 +298,9 @@ class MAINGAME:
             width=20,
         )
         self.buyBt.pack(pady="10")
-        self.listeCombobox.bind("<<ComboboxSelected>>",
-                                partial(self.onComboboxChange, "legumes"))
+        self.listeCombobox.bind(
+            "<<ComboboxSelected>>", partial(self.onComboboxChange, "legumes")
+        )
         self.buyBt.bind("<Button-1>", partial(self.onBtBuyClick, "legumes"))
 
     def onBtFleursClick(self, *_event):
@@ -317,9 +308,9 @@ class MAINGAME:
             child.unbind("<Button-1>")
             child.unbind("<<ComboboxSelected>>")
             child.destroy()
-        self.listeCombobox = ttk.Combobox(self.centerbottomframe,
-                                          values=getFlowersNames(),
-                                          state="readonly")
+        self.listeCombobox = ttk.Combobox(
+            self.centerbottomframe, values=getFlowersNames(), state="readonly"
+        )
         self.listeCombobox.pack()
         self.listeCombobox.current(0)
         self.PriceLabel = Label(self.centerbottomframe, text="2.0 €")
@@ -331,8 +322,9 @@ class MAINGAME:
             width=20,
         )
         self.buyBt.pack(pady="10")
-        self.listeCombobox.bind("<<ComboboxSelected>>",
-                                partial(self.onComboboxChange, "fleurs"))
+        self.listeCombobox.bind(
+            "<<ComboboxSelected>>", partial(self.onComboboxChange, "fleurs")
+        )
         self.buyBt.bind("<Button-1>", partial(self.onBtBuyClick, "fleurs"))
 
     def onBtBuyClick(self, typeCombo, *_event):
@@ -340,13 +332,15 @@ class MAINGAME:
             for legume in Legumes:
                 if legume.getNom() == self.listeCombobox.get():
                     self.items.append(legume)
-                    pactolenumber = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
-                                               self.pactole["text"])
+                    pactolenumber = re.findall(
+                        r"[-+]?\d*\.?\d+|[-+]?\d+", self.pactole["text"]
+                    )
                     pactolenumber[0] = float(pactolenumber[0])
                     pactolenumber = float(f"{pactolenumber[0]:.2f}")
                     if pactolenumber - legume.getPrixAchat() < 0:
                         tkmessage.showwarning(
-                            "Attention", "Vous n'avez plus assez de flouz !")
+                            "Attention", "Vous n'avez plus assez de flouz !"
+                        )
                         break
                     pactolenumber -= legume.getPrixAchat()
                     self.pactole["text"] = str(f"{pactolenumber:.2f}") + " €"
@@ -354,13 +348,15 @@ class MAINGAME:
             for fleur in Fleurs:
                 if fleur.getNom() == self.listeCombobox.get():
                     self.items.append(fleur)
-                    pactolenumber = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
-                                               self.pactole["text"])
+                    pactolenumber = re.findall(
+                        r"[-+]?\d*\.?\d+|[-+]?\d+", self.pactole["text"]
+                    )
                     pactolenumber[0] = float(pactolenumber[0])
                     pactolenumber = float(f"{pactolenumber[0]:.2f}")
                     if pactolenumber - fleur.getPrixAchat() < 0:
                         tkmessage.showwarning(
-                            "Attention", "Vous n'avez plus assez de flouz !")
+                            "Attention", "Vous n'avez plus assez de flouz !"
+                        )
                         break
                     pactolenumber -= fleur.getPrixAchat()
                     self.pactole["text"] = str(f"{pactolenumber:.2f}") + " €"
@@ -369,16 +365,17 @@ class MAINGAME:
                 if animal.getNom() == self.listeComboboxAnimaux.get():
                     self.items.append(animal)
                     index = len(self.items) - 1
-                    season = re.findall(
-                        r"[-+]?\d*\.?\d+|[-+]?\d+", self.saison["text"])
+                    season = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.saison["text"])
                     self.items[index].setSaisonDebut(int(season[0]))
-                    pactolenumber = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
-                                               self.pactole["text"])
+                    pactolenumber = re.findall(
+                        r"[-+]?\d*\.?\d+|[-+]?\d+", self.pactole["text"]
+                    )
                     pactolenumber[0] = float(pactolenumber[0])
                     pactolenumber = float(f"{pactolenumber[0]:.2f}")
                     if pactolenumber - animal.getPrixAchat() < 0:
                         tkmessage.showwarning(
-                            "Attention", "Vous n'avez plus assez de flouz !")
+                            "Attention", "Vous n'avez plus assez de flouz !"
+                        )
                         break
                     pactolenumber -= animal.getPrixAchat()
                     self.pactole["text"] = str(f"{pactolenumber:.2f}") + " €"
