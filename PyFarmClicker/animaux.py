@@ -23,10 +23,8 @@ class Animal:
         return self.__gain
 
     def getProduction(self, saison):
-        if (
-            self.__gainmin <= self.__age < self.__gainmax
-            and (saison - self.__saisonDebut) % 4 == 0
-        ):
+        if (self.__gainmin <= self.__age < self.__gainmax
+                and (saison - self.__saisonDebut) % 4 == 0):
             return self.__gain
         else:
             return 0
