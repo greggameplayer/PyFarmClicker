@@ -144,7 +144,8 @@ class MAINGAME:
         self.buyBtAnimaux.pack(pady="10")
         self.listeComboboxAnimaux.bind("<<ComboboxSelected>>",
                                        partial(self.onComboboxChange, "animaux"))
-        self.buyBtAnimaux.bind("<Button-1>", partial(self.onBtBuyClick, "animaux"))
+        self.buyBtAnimaux.bind(
+            "<Button-1>", partial(self.onBtBuyClick, "animaux"))
 
     def onBtSellAnimalsClick(self, *_event):
         animalcounter = 0
@@ -285,7 +286,8 @@ class MAINGAME:
         elif typeCombo == "animaux":
             for animal in getAnimaux():
                 if animal.getNom() == self.listeComboboxAnimaux.get():
-                    self.PriceLabelAnimaux["text"] = str(animal.getPrixAchat()) + " €"
+                    self.PriceLabelAnimaux["text"] = str(
+                        animal.getPrixAchat()) + " €"
 
     def onBtLegumesClick(self, *_event):
         for child in self.centerbottomframe.winfo_children():
@@ -367,7 +369,8 @@ class MAINGAME:
                 if animal.getNom() == self.listeComboboxAnimaux.get():
                     self.items.append(animal)
                     index = len(self.items) - 1
-                    season = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.saison["text"])
+                    season = re.findall(
+                        r"[-+]?\d*\.?\d+|[-+]?\d+", self.saison["text"])
                     self.items[index].setSaisonDebut(int(season[0]))
                     pactolenumber = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
                                                self.pactole["text"])
