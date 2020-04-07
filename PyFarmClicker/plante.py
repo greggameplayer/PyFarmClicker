@@ -68,6 +68,7 @@ def getFlowerColors():
 def getFashionFlowerColor():
     return random.choice(getFlowerColors())
 
+
 def getPlantes():
     plantes = []
     plantes.extend(Legumes)

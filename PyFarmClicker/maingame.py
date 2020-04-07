@@ -5,8 +5,8 @@ import tkinter.ttk as ttk
 from functools import partial
 from tkinter import *
 
-from PyFarmClicker.plante import *
 from PyFarmClicker.animaux import *
+from PyFarmClicker.plante import *
 
 
 class MAINGAME:
@@ -142,9 +142,10 @@ class MAINGAME:
             width=20,
         )
         self.buyBtAnimaux.pack(pady="10")
-        self.listeComboboxAnimaux.bind("<<ComboboxSelected>>",
-                                       partial(self.onComboboxChange, "animaux"))
-        self.buyBtAnimaux.bind("<Button-1>", partial(self.onBtBuyClick, "animaux"))
+        self.listeComboboxAnimaux.bind(
+            "<<ComboboxSelected>>", partial(self.onComboboxChange, "animaux"))
+        self.buyBtAnimaux.bind("<Button-1>",
+                               partial(self.onBtBuyClick, "animaux"))
 
     def onBtSellAnimalsClick(self, *_event):
         animalcounter = 0
@@ -162,9 +163,8 @@ class MAINGAME:
                     item.setSelled(True)
                     self.items.remove(item)
         if animalcounter == 0:
-            tkmessage.showwarning(
-                "Attention",
-                "Vous n'avez pas acheté d'animaux !")
+            tkmessage.showwarning("Attention",
+                                  "Vous n'avez pas acheté d'animaux !")
             return
         print(self.items)
 
@@ -220,9 +220,8 @@ class MAINGAME:
                     diff = float(diff) + float(itemprice)
                     self.items.remove(item)
         if plantescounter == 0:
-            tkmessage.showwarning(
-                "Attention",
-                "Vous n'avez pas acheté de plantes !")
+            tkmessage.showwarning("Attention",
+                                  "Vous n'avez pas acheté de plantes !")
             return
 
         season = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.saison["text"])
@@ -285,7 +284,8 @@ class MAINGAME:
         elif typeCombo == "animaux":
             for animal in getAnimaux():
                 if animal.getNom() == self.listeComboboxAnimaux.get():
-                    self.PriceLabelAnimaux["text"] = str(animal.getPrixAchat()) + " €"
+                    self.PriceLabelAnimaux["text"] = str(
+                        animal.getPrixAchat()) + " €"
 
     def onBtLegumesClick(self, *_event):
         for child in self.centerbottomframe.winfo_children():
@@ -367,7 +367,8 @@ class MAINGAME:
                 if animal.getNom() == self.listeComboboxAnimaux.get():
                     self.items.append(animal)
                     index = len(self.items) - 1
-                    season = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+", self.saison["text"])
+                    season = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
+                                        self.saison["text"])
                     self.items[index].setSaisonDebut(int(season[0]))
                     pactolenumber = re.findall(r"[-+]?\d*\.?\d+|[-+]?\d+",
                                                self.pactole["text"])
