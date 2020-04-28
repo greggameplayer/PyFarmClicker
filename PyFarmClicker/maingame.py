@@ -96,7 +96,7 @@ class MAINGAME:
         sellPlantes.bind("<Button-1>", self.onBtSellPlantesClick)
         self.game.protocol("WM_DELETE_WINDOW", self.closeWindow)
         try:
-            save = read_object("save.pkl")
+            save = read_object(find_data_file("save.pkl"))
             self.items = save['items']
             self.pactole['text'] = save['pactole']
             self.saison['text'] = save['saison']
@@ -402,6 +402,6 @@ class MAINGAME:
         MainObj['saison'] = self.saison['text']
         MainObj['pactole'] = self.pactole['text']
 
-        save_object(MainObj, "save.pkl")
+        save_object(MainObj, find_data_file("save.pkl"))
         self.quit()
 
