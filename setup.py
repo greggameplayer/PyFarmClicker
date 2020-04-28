@@ -9,7 +9,7 @@ os.system("py -m pip install -r requirements.txt")
 build_exe_options = {
     "includes": [],
     "optimize": 2,
-    # "include_files": [("resources", "resources")],
+    "include_files": [("resources", "resources")],
 }
 
 base = None
@@ -20,7 +20,7 @@ executables = [
     Executable(
         "__main__.py",
         base=base,
-        # icon="resources/images/snakes-and-ladders.ico",
+        icon="resources/images/logo.ico",
         targetName="PyFarmClicker",
     )
 ]

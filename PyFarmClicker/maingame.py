@@ -1,4 +1,5 @@
 import re
+import time
 import tkinter.font as tkfont
 import tkinter.messagebox as tkmessage
 import tkinter.ttk as ttk
@@ -7,6 +8,7 @@ from tkinter import *
 
 from PyFarmClicker.animaux import *
 from PyFarmClicker.plante import *
+from PyFarmClicker.functions import *
 
 
 class MAINGAME:
@@ -14,6 +16,12 @@ class MAINGAME:
         self.game = Tk()
         self.game.title("PyFarmClicker")
         self.game.geometry("600x600")
+        try:
+            self.game.iconbitmap(
+                find_data_file("images/logo.ico"))
+        except TclError:
+            tkmessage.showwarning("Attention", "Vous avez supprimé le logo !")
+            pass
         self.game.resizable(False, False)
         self.topframe = Frame(self.game)
         self.topframe.pack()
@@ -86,6 +94,14 @@ class MAINGAME:
         finir.bind("<Button-1>", self.onBtFinirClick)
         sellAnimals.bind("<Button-1>", self.onBtSellAnimalsClick)
         sellPlantes.bind("<Button-1>", self.onBtSellPlantesClick)
+        self.game.protocol("WM_DELETE_WINDOW", self.closeWindow)
+        try:
+            save = read_object("save.pkl")
+            self.items = save['items']
+            self.pactole['text'] = save['pactole']
+            self.saison['text'] = save['saison']
+        except FileNotFoundError:
+            pass
         self.game.mainloop()
 
     def quit(self):
@@ -380,3 +396,12 @@ class MAINGAME:
                         break
                     pactolenumber -= animal.getPrixAchat()
                     self.pactole["text"] = str(f"{pactolenumber:.2f}") + " €"
+
+    def closeWindow(self):
+        MainObj['items'] = self.items
+        MainObj['saison'] = self.saison['text']
+        MainObj['pactole'] = self.pactole['text']
+
+        save_object(MainObj, "save.pkl")
+        self.quit()
+

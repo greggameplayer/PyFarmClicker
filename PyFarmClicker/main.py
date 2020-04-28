@@ -6,6 +6,12 @@ class MAINMENU:
         self.menu = Tk()
         self.menu.title("PyFarmClicker")
         self.menu.geometry("600x600")
+        try:
+            self.menu.iconbitmap(
+                find_data_file("images/logo.ico"))
+        except TclError:
+            tkmessage.showwarning("Attention", "Vous avez supprimé le logo !")
+            pass
         self.menu.resizable(False, False)
         gameTitle = Label(
             self.menu,
